@@ -1,4 +1,4 @@
-﻿using ASPNETv2.Helper.JwtToken;
+﻿using ASPNETv2.Helper.JwtUtils;
 using ASPNETv2.Services.UserService;
 
 namespace ASPNETv2.Helper.Middleware

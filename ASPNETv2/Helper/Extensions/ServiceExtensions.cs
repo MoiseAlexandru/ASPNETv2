@@ -1,4 +1,5 @@
 ﻿
+using ASPNETv2.Helper.JwtUtils;
 using ASPNETv2.Helper.Seeders;
 using ASPNETv2.Repository.GroupRepository;
 using ASPNETv2.Repository.NoteRepostitory;
@@ -30,6 +31,11 @@ namespace ASPNETv2.Extensions
         public static IServiceCollection AddSeeders(this IServiceCollection services)
         {
             services.AddScoped<ProfileSeeder>();
+            return services;
+        }
+        public static IServiceCollection AddUtils(this IServiceCollection services)
+        {
+            services.AddScoped <IJwtUtils, IJwtUtils>();
             return services;
         }
     }

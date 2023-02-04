@@ -1,4 +1,4 @@
-﻿using ASPNETv2.Helper.JwtToken;
+﻿using ASPNETv2.Helper.JwtUtils;
 using ASPNETv2.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -56,7 +56,7 @@ namespace ASPNETv2.Helper.JwtUtils
                 var userId = new Guid(jwtToken.Claims.FirstOrDefault(x => x.Type == "id").Value);
                 return userId;
             }
-            catch (Exception)
+            catch
             {
                 return Guid.Empty;
             }

@@ -1,4 +1,4 @@
-﻿using ASPNETv2.Helper.JwtToken;
+﻿using ASPNETv2.Helper.JwtUtils;
 using ASPNETv2.Models;
 using ASPNETv2.Models.DTOs;
 using ASPNETv2.Repository.UserRepository;

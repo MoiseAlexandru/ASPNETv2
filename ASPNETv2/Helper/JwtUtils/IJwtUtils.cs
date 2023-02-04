@@ -1,6 +1,6 @@
 ﻿using ASPNETv2.Models;
 
-namespace ASPNETv2.Helper.JwtToken
+namespace ASPNETv2.Helper.JwtUtils
 {
     public interface IJwtUtils
     {

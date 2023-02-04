@@ -23,10 +23,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddSeeders();
+builder.Services.AddUtils();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 var app = builder.Build();
-
+SeedData(app);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
