@@ -1,6 +1,10 @@
-﻿using ASPNETv2.Services.UserService;
+﻿using ASPNETv2.Models;
+using ASPNETv2.Models.DTOs;
+using ASPNETv2.Models.Enum;
+using ASPNETv2.Services.UserService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace ASPNETv2.Controllers
 {
@@ -18,6 +22,19 @@ namespace ASPNETv2.Controllers
         {
             var result = _userService.GetNameByEmail(email);
             return Ok(result);
+        }
+        [HttpPost("create-user")]
+        public async Task <IActionResult> CreateUser(UserRequestDTO user)
+        {
+            var userToCreate = new User
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Role = user.Role,
+                PasswordHash = BCryptNet.HashPassword(user.Password)
+            };
+            await _userService.Create(userToCreate);
+            return Ok();
         }
     }
 }

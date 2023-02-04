@@ -56,7 +56,7 @@ namespace ASPNETv2.Helper.JwtUtils
                 var userId = new Guid(jwtToken.Claims.FirstOrDefault(x => x.Type == "id").Value);
                 return userId;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Guid.Empty;
             }

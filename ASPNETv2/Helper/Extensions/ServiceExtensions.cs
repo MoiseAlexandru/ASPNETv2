@@ -30,7 +30,7 @@ namespace ASPNETv2.Extensions
         public static IServiceCollection AddSeeders(this IServiceCollection services)
         {
             services.AddScoped<ProfileSeeder>();
-            return services
+            return services;
         }
     }
 }

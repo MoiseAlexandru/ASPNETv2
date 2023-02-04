@@ -22,7 +22,7 @@ namespace ASPNETv2.Helper.Seeders
                 };
                 var profile2 = new Profile
                 {
-                    Username = "popescuandrei"
+                    Username = "popescuandrei",
                     FirstName = "Popescu",
                     LastName = "Andrei"
                 };

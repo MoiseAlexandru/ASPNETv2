@@ -1,4 +1,5 @@
-﻿using ASPNETv2.Models.DTOs;
+﻿using ASPNETv2.Models;
+using ASPNETv2.Models.DTOs;
 
 namespace ASPNETv2.Services.UserService
 {
@@ -7,7 +8,7 @@ namespace ASPNETv2.Services.UserService
         EmailNameDTO GetNameByEmail(string username);
         Task<EmailNameDTO> GetNameByEmailAsync(string username);
         UserResponseDTO Authenticate(UserRequestDTO model);
-        UserRequestDTO GetById(Guid id);
-        Task Create(UserRequestDTO newUser);
+        User GetById(Guid id);
+        Task Create(User newUser);
     }
 }

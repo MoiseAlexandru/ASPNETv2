@@ -53,14 +53,17 @@ namespace ASPNETv2.Services.UserService
             return new UserResponseDTO(user, jwtToken);
         }
 
-        public Task Create(UserRequestDTO newUser)
+
+        public async Task Create(User newUser)
         {
-            throw new NotImplementedException();
+            await _userRepository.CreateAsync(newUser);
+            await _userRepository.SaveAsync();
         }
 
-        UserRequestDTO IUserService.GetById(Guid id)
+        public User GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _userRepository.FindById(id);
         }
+
     }
 }

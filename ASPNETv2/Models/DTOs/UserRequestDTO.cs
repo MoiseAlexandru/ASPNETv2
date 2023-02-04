@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ASPNETv2.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace ASPNETv2.Models.DTOs
 {
@@ -9,5 +10,7 @@ namespace ASPNETv2.Models.DTOs
         [Required]
         public string Password { get; set; }
         public string Email { get; set; }
+        public Role Role { get; set; }
+
     }
 }
