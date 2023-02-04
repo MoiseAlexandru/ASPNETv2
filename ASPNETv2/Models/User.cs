@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ASPNETv2.Models
 {
-    public class User
+    public class User : BaseEntity.BaseEntity
     {
         public Guid UserId { get; set; }
         public string? Email { get; set; }
