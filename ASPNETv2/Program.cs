@@ -1,5 +1,6 @@
 using ASPNETv2.Data;
 using ASPNETv2.Extensions;
+using ASPNETv2.Helper.Seeders;
 using ASPNETv2.Repository.GroupRepository;
 using ASPNETv2.Repository.NoteRepostitory;
 using ASPNETv2.Repository.ProfileRepository;
@@ -20,6 +21,7 @@ builder.Services.AddSwaggerGen();
 // Repositories
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+builder.Services.AddSeeders();
 
 var app = builder.Build();
 
@@ -37,3 +39,14 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+void SeedData(IHost app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<ProfileSeeder>();
+        service.SeedInitialProfiles();
+    }
+}
