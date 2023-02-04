@@ -9,5 +9,7 @@ namespace ASPNETv2.Repository.ProfileRepository
         Task <List<Profile>> GetAllWithIncludeAsync();
         List<Profile> GetAllWithJoin();
         Task <List<Profile>> GetAllWithJoinAsync();
+        Profile GetGroupsByUser(string username);
+        Task <Profile> GetGroupsByUserAsync(string username);
     }
 }
