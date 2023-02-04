@@ -7,6 +7,7 @@ namespace ASPNETv2.Models
     {
         public Guid UserId { get; set; }
         public string? Email { get; set; }
+        public string UserName { get; set; }
         public Guid? ProfileId { get; set; }
         public Profile? Profile { get; set; }
         [JsonIgnore]

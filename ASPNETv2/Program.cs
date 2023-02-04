@@ -1,5 +1,6 @@
 using ASPNETv2.Data;
 using ASPNETv2.Extensions;
+using ASPNETv2.Helper;
 using ASPNETv2.Helper.Seeders;
 using ASPNETv2.Repository.GroupRepository;
 using ASPNETv2.Repository.NoteRepostitory;
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddSeeders();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 var app = builder.Build();
 

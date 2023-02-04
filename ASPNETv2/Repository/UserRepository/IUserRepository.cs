@@ -9,5 +9,6 @@ namespace ASPNETv2.Repository.UserRepository
         Task <List<User> > GetAllWithIncludeAsync();
         User GetUserByEmail(string email);
         Task <User> GetUserByEmailAsync(string email);
+        User FindByUsername(string username);
     }
 }

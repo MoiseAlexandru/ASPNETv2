@@ -6,5 +6,8 @@ namespace ASPNETv2.Services.UserService
     {
         EmailNameDTO GetNameByEmail(string username);
         Task<EmailNameDTO> GetNameByEmailAsync(string username);
+        UserResponseDTO Authenticate(UserRequestDTO model);
+        UserRequestDTO GetById(Guid id);
+        Task Create(UserRequestDTO newUser);
     }
 }

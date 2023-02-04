@@ -1,15 +1,19 @@
-﻿using ASPNETv2.Models;
+﻿using ASPNETv2.Helper.JwtToken;
+using ASPNETv2.Models;
 using ASPNETv2.Models.DTOs;
 using ASPNETv2.Repository.UserRepository;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace ASPNETv2.Services.UserService
 {
     public class UserService : IUserService
     {
         public IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        public IJwtUtils _jwtUtils;
+        public UserService(IUserRepository userRepository, IJwtUtils jwtUtils)
         {
             _userRepository = userRepository;
+            _jwtUtils = jwtUtils;
         }
         public EmailNameDTO GetNameByEmail(string email)
         {
@@ -36,5 +40,27 @@ namespace ASPNETv2.Services.UserService
            return result;
         }
         */
+
+        // Autentificare
+        public UserResponseDTO Authenticate(UserRequestDTO model)
+        {
+            var user = _userRepository.FindByUsername(model.UserName);
+            if (user == null || !BCryptNet.Verify(model.Password, user.PasswordHash))
+            {
+                return null;
+            }
+            var jwtToken = _jwtUtils.GenerateJwtToken(user);
+            return new UserResponseDTO(user, jwtToken);
+        }
+
+        public Task Create(UserRequestDTO newUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        UserRequestDTO IUserService.GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
