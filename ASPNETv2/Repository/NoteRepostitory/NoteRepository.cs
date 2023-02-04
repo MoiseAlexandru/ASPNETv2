@@ -16,5 +16,9 @@ namespace ASPNETv2.Repository.NoteRepostitory
         {
             return await _table.Include(note => note.Profile).ToListAsync();
         }
+        public Note GetQuickNote(Guid noteId)
+        {
+            return _table.Include(note => note.Profile).FirstOrDefault(note => note.NoteId == noteId);
+        }
     }
 }

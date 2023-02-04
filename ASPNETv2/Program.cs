@@ -1,4 +1,5 @@
 using ASPNETv2.Data;
+using ASPNETv2.Extensions;
 using ASPNETv2.Repository.GroupRepository;
 using ASPNETv2.Repository.NoteRepostitory;
 using ASPNETv2.Repository.ProfileRepository;
@@ -17,11 +18,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Repositories
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IProfileRepository, ProfileRepository>();
-builder.Services.AddTransient<IProfileService, ProfileService>();
-builder.Services.AddTransient<IGroupRepository, GroupRepository>();
-builder.Services.AddTransient<INoteRepository, NoteRepository>();
+builder.Services.AddRepositories();
+builder.Services.AddServices();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

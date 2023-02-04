@@ -16,6 +16,13 @@ namespace ASPNETv2.Repository.UserRepository
         {
             return await _table.Include(user => user.Profile).ToListAsync();
         }
-
+        public User GetUserByEmail(string email)
+        { 
+            return _table.Include(user => user.Profile).FirstOrDefault(user => user.Email == email);
+        }
+        public async Task <User> GetUserByEmailAsync(string email)
+        {
+            return await _table.Include(user => user.Profile).FirstOrDefaultAsync(user => user.Email == email);
+        }
     }
 }

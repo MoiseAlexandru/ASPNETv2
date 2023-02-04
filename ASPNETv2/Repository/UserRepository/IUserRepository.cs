@@ -7,5 +7,7 @@ namespace ASPNETv2.Repository.UserRepository
     {
         List<User> GetAllWithInclude();
         Task <List<User> > GetAllWithIncludeAsync();
+        User GetUserByEmail(string email);
+        Task <User> GetUserByEmailAsync(string email);
     }
 }
