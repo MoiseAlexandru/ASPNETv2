@@ -40,6 +40,7 @@ namespace ASPNETv2.Data
                 .HasForeignKey(mr => mr.GroupId);
 
             // Users - Profiles
+
             modelBuilder.Entity<User>()
                 .HasOne(user => user.Profile)
                 .WithOne(profile => profile.User)

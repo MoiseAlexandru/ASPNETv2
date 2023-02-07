@@ -13,5 +13,6 @@ namespace ASPNETv2.Services.UserService
         Task <List<User>> GetUserListAsync();
         Task DeleteUser(User userToDelete);
         Task <User> GetUserByUsername(string username);
+        Task LinkToProfile(User user, Profile profile);
     }
 }

@@ -26,19 +26,26 @@ namespace ASPNETv2.Services.ProfileService
             }
             return result;
         }
-        public async Task CreateOnUserRegistration(User user)
+        public async Task <Profile> CreateOnUserRegistration(User user)
         {
             Profile newProfile = new Profile();
-            newProfile.Id = user.Id;
+            newProfile.Id = Guid.NewGuid();
             newProfile.Username = user.UserName;
             newProfile.User = user;
             newProfile.UserId = user.UserId;
             await Task.Run(() => _profileRepository.Create(newProfile));
             await _profileRepository.SaveAsync();
+            return newProfile;
         }
         public async Task<List<Profile>> GetProfileList()
         {
             return await _profileRepository.GetProfileList();
+        }
+        public async Task LinkToUser(Profile profile, User user)
+        {
+            profile.UserId = user.Id;
+            _profileRepository.Update(profile);
+            await _profileRepository.SaveAsync();
         }
     }
 }

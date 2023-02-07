@@ -5,7 +5,7 @@
         public Guid GroupId { get; set; }
         public string? GroupName { get; set; }
         public string? Description { get; set; }
-        public ICollection <Profile>? Profiles { get; set; }
+        public ICollection<Profile>? Profiles { get; set; }
         public ICollection<ProfileGroupRelation>? ProfileGroupRelations { get; set; }
     }
 }

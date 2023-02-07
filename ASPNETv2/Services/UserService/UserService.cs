@@ -79,5 +79,11 @@ namespace ASPNETv2.Services.UserService
         {
             return await _userRepository.GetUserByUsername(username);
         }
+        public async Task LinkToProfile(User user, Profile profile)
+        {
+            user.ProfileId = profile.Id;
+            _userRepository.Update(user);
+            await _userRepository.SaveAsync();
+        }
     }
 }

@@ -51,8 +51,10 @@ namespace ASPNETv2.Controllers
                 PasswordHash = BCryptNet.HashPassword(user.Password)
             };
             await _userService.Create(userToCreate);
-            await _profileService.CreateOnUserRegistration(userToCreate);
-            return Ok();
+            Profile newProfile = await _profileService.CreateOnUserRegistration(userToCreate);
+            await _userService.LinkToProfile(userToCreate, newProfile);
+            await _profileService.LinkToUser(newProfile, userToCreate);
+            return Ok(newProfile);
         }
 
         [HttpPost("create-admin")]
