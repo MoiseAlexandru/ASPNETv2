@@ -2,9 +2,9 @@
 {
     public class GroupJoinInDTO
     {
-        public string Username;
-        public string FirstName;
-        public string LastName;
-        public string GroupName;
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string GroupName { get; set; }
     }
 }

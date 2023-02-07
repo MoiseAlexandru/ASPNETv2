@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNETv2.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230204014844_InitMigration")]
-    partial class InitMigration
+    [Migration("20230204143643_Migrare")]
+    partial class Migrare
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,9 +147,17 @@ namespace ASPNETv2.Migrations
 
             modelBuilder.Entity("ASPNETv2.Models.User", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -163,7 +171,14 @@ namespace ASPNETv2.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });

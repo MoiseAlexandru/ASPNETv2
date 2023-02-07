@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ASPNETv2.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class Migrare : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,15 +31,19 @@ namespace ASPNETv2.Migrations
                 name: "Users",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<int>(type: "int", nullable: false)
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,7 +67,7 @@ namespace ASPNETv2.Migrations
                         name: "FK_Profiles_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

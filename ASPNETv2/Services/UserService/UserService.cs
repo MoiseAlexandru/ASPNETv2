@@ -60,10 +60,24 @@ namespace ASPNETv2.Services.UserService
             await _userRepository.SaveAsync();
         }
 
+
         public User GetById(Guid id)
         {
             return _userRepository.FindById(id);
         }
 
+        public async Task <List <User>> GetUserListAsync()
+        {
+            return await _userRepository.GetUserListAsync();
+        }
+        public async Task DeleteUser(User userToDelete)
+        {
+            await Task.Run(() => _userRepository.Delete(userToDelete));
+            await _userRepository.SaveAsync();
+        }
+        public async Task <User> GetUserByUsername(string username)
+        {
+            return await _userRepository.GetUserByUsername(username);
+        }
     }
 }

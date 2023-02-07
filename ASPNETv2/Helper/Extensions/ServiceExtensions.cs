@@ -35,7 +35,7 @@ namespace ASPNETv2.Extensions
         }
         public static IServiceCollection AddUtils(this IServiceCollection services)
         {
-            services.AddScoped <IJwtUtils, IJwtUtils>();
+            services.AddScoped <IJwtUtils, JwtUtils>();
             return services;
         }
     }

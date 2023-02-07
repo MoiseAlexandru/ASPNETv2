@@ -7,9 +7,16 @@ namespace ASPNETv2.Repository.UserRepository
     public class UserRepository : GenericRepository.GenericRepository <User>, IUserRepository
     {
         public UserRepository(DatabaseContext context) : base(context) { }
-        public List<User> GetAllWithInclude()
+        public List<User> GetFullUserList()
         {
             return _table.Include(user => user.Profile).ToList();
+        }
+
+        public async Task <List <User> > GetUserListAsync()
+        {
+            var rezultat = await (from user in _table
+                           select user).ToListAsync();
+            return rezultat;
         }
 
         public User FindByUsername(string username)
@@ -28,6 +35,10 @@ namespace ASPNETv2.Repository.UserRepository
         public async Task <User> GetUserByEmailAsync(string email)
         {
             return await _table.Include(user => user.Profile).FirstOrDefaultAsync(user => user.Email == email);
+        }
+        public async Task <User> GetUserByUsername(string username)
+        {
+            return await _table.FirstOrDefaultAsync(user => user.UserName == username);
         }
     }
 }

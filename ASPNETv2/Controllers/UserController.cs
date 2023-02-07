@@ -23,8 +23,8 @@ namespace ASPNETv2.Controllers
             var result = _userService.GetNameByEmail(email);
             return Ok(result);
         }
-        [HttpPost("create-user")]
-        public async Task <IActionResult> CreateUser(UserRequestDTO user)
+        [HttpPost("create-custom-user")]
+        public async Task <IActionResult> CreateCustomUser(UserRequestDTO user)
         {
             var userToCreate = new User
             {
@@ -35,6 +35,47 @@ namespace ASPNETv2.Controllers
             };
             await _userService.Create(userToCreate);
             return Ok();
+        }
+
+        [HttpPost("create-default-user")]
+        public async Task <IActionResult> CreateDefaultUser(UserRequestDTO user)
+        {
+            var userToCreate = new User
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Role = Role.User,
+                PasswordHash = BCryptNet.HashPassword(user.Password)
+            };
+            await _userService.Create(userToCreate);
+            return Ok();
+        }
+
+        [HttpPost("create-admin")]
+        public async Task<IActionResult> CreateAdmin(UserRequestDTO user)
+        {
+            var userToCreate = new User
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Role = Role.Admin,
+                PasswordHash = BCryptNet.HashPassword(user.Password)
+            };
+            await _userService.Create(userToCreate);
+            return Ok();
+        }
+        [HttpGet("get-user-list")]
+        public async Task <IActionResult> GetUserList()
+        {
+            var users = await _userService.GetUserListAsync();
+            return Ok(users);
+        }
+        [HttpDelete("delete-user")]
+        public async Task <IActionResult> DeleteUser(string username)
+        {
+            User user = await _userService.GetUserByUsername(username);
+            await _userService.DeleteUser(user);
+            return Ok(user);
         }
     }
 }
