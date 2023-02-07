@@ -14,10 +14,16 @@ namespace ASPNETv2.Controllers
         {
             _profileService = profileService;
         }
-        [HttpGet]
+        [HttpGet("get-group-list")]
         public IActionResult GetGroupsByUsername(string username)
         {
             var result = _profileService.GetGroupListByUsername(username);
+            return Ok(result);
+        }
+        [HttpGet("get-profile-list")]
+        public async Task <IActionResult> GetProfilesList()
+        {
+            var result = await _profileService.GetProfileList();
             return Ok(result);
         }
     }

@@ -14,9 +14,9 @@ namespace ASPNETv2.Repository.UserRepository
 
         public async Task <List <User> > GetUserListAsync()
         {
-            var rezultat = await (from user in _table
+            var result = await (from user in _table
                            select user).ToListAsync();
-            return rezultat;
+            return result;
         }
 
         public User FindByUsername(string username)

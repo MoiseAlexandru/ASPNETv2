@@ -26,5 +26,19 @@ namespace ASPNETv2.Services.ProfileService
             }
             return result;
         }
+        public async Task CreateOnUserRegistration(User user)
+        {
+            Profile newProfile = new Profile();
+            newProfile.Id = user.Id;
+            newProfile.Username = user.UserName;
+            newProfile.User = user;
+            newProfile.UserId = user.UserId;
+            await Task.Run(() => _profileRepository.Create(newProfile));
+            await _profileRepository.SaveAsync();
+        }
+        public async Task<List<Profile>> GetProfileList()
+        {
+            return await _profileRepository.GetProfileList();
+        }
     }
 }

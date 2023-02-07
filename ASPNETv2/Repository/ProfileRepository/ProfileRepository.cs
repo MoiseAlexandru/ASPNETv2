@@ -42,5 +42,12 @@ namespace ASPNETv2.Repository.ProfileRepository
             var result = _table.FirstOrDefaultAsync(profile => profile.Username.Equals(username));
             return await result;
         }
+
+        public async Task <List <Profile> > GetProfileList()
+        {
+            var result = await (from profile in _table
+                                  select profile).ToListAsync();
+            return result;
+        }
     }
 }

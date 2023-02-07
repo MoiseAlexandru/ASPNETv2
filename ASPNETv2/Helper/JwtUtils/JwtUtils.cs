@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using ASPNETv2.Helper;
 
 namespace ASPNETv2.Helper.JwtUtils
 {
@@ -18,6 +19,7 @@ namespace ASPNETv2.Helper.JwtUtils
         public string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
+            System.Diagnostics.Debug.WriteLine(_appSettings.JwtToken);
             var appPrivateKey = Encoding.ASCII.GetBytes(_appSettings.JwtToken);
 
             var tokenDescriptor = new SecurityTokenDescriptor

@@ -11,5 +11,6 @@ namespace ASPNETv2.Repository.ProfileRepository
         Task <List<Profile>> GetAllWithJoinAsync();
         Profile GetGroupsByUser(string username);
         Task <Profile> GetGroupsByUserAsync(string username);
+        Task<List<Profile>> GetProfileList();
     }
 }

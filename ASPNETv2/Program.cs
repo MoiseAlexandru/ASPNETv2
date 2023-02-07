@@ -1,6 +1,7 @@
 using ASPNETv2.Data;
 using ASPNETv2.Extensions;
 using ASPNETv2.Helper;
+using ASPNETv2.Helper.Middleware;
 using ASPNETv2.Helper.Seeders;
 using ASPNETv2.Repository.GroupRepository;
 using ASPNETv2.Repository.NoteRepostitory;
@@ -39,6 +40,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
 
 app.Run();
