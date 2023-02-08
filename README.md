@@ -43,7 +43,7 @@ DELETE /Note/delete-note: sterge o notita. Are nevoie de id, care se gaseste din
 
 PATCH /Note/modify-note: modifica o notita.
 
-__
+___
 
 Ce mai trebuie facut:
 1. Returnat exceptii acolo unde este cazul (Swagger intoarce erori undefined, insa ar fi bine sa fie specificate)
