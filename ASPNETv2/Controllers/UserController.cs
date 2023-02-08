@@ -97,7 +97,7 @@ namespace ASPNETv2.Controllers
             var response = _userService.Authenticate(user);
             if (response == null)
             {
-                return BadRequest("Username or password is invalid!");
+                return BadRequest("Username / password is invalid or wrong Role selected!");
             }
             return Ok();
         }

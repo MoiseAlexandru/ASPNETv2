@@ -8,5 +8,6 @@
         public string? Description { get; set; }
         public Profile? Profile { get; set; }
         public Guid? ProfileId { get; set; }
+        public string Username { get; set; }
     }
 }

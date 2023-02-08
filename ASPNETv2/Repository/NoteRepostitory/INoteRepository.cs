@@ -8,5 +8,7 @@ namespace ASPNETv2.Repository.NoteRepostitory
         List<Note> GetAllWithInclude();
         Task<List<Note>> GetAllWithIncludeAsync();
         Note GetQuickNote(Guid id);
+        Task <Note> FindNoteByIdAsync(Guid id);
+        Task<List <Note>> GetAllNotes();
     }
 }

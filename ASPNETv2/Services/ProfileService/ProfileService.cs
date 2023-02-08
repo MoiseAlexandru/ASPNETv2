@@ -26,6 +26,11 @@ namespace ASPNETv2.Services.ProfileService
             }
             return result;
         }
+        public async Task <Profile> GetProfileByUsername(string username)
+        {
+            Profile profile = await _profileRepository.GetProfileByUsername(username);
+            return profile;
+        }
         public async Task<Profile> CreateOnUserRegistration(User user)
         {
             Profile newProfile = new Profile();
@@ -33,13 +38,29 @@ namespace ASPNETv2.Services.ProfileService
             newProfile.UserId = user.UserId;
             newProfile.Username = user.UserName;
             newProfile.User = user;
+            newProfile.Notes = new List<Note>();
             await Task.Run(() => _profileRepository.Create(newProfile));
             await _profileRepository.SaveAsync();
             return newProfile;
         }
-        public async Task<List<Profile>> GetProfileList()
+        public async Task<List<ProfileDTO>> GetProfileList()
         {
-            return await _profileRepository.GetProfileList();
+            List <Profile> queryResult = await _profileRepository.GetProfileList();
+            List<ProfileDTO> convertedResult = new List<ProfileDTO>();
+            foreach(var profile in queryResult)
+            {
+                ProfileDTO profileDTO = new ProfileDTO();
+                profileDTO.Username = profile.Username;
+                profileDTO.FirstName = profile.FirstName;
+                profileDTO.LastName = profile.LastName;
+                profileDTO.Address = profile.Address;
+                profileDTO.ProfileId = profile.ProfileId;
+                profileDTO.UserId = profile.UserId;
+                //profileDTO.NoteIds = profile.NoteIds;
+                //profileDTO.GroupIds = profile.GroupIds;
+                convertedResult.Add(profileDTO);
+            }
+            return convertedResult;
         }
         public async Task LinkToUser(Profile profile, User user)
         {
@@ -66,6 +87,13 @@ namespace ASPNETv2.Services.ProfileService
             _profileRepository.Update(profileToUpdate);
             await _profileRepository.SaveAsync();
         }
-
+        public async Task LinkNote(Profile profile, Note note)
+        {
+            if(profile.Notes == null)
+                profile.Notes = new List<Note>();
+            profile.Notes.Add(note);
+            _profileRepository.Update(profile);
+            await _profileRepository.SaveAsync();
+        }
     }
 }

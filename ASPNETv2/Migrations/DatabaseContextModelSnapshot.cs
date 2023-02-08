@@ -79,6 +79,10 @@ namespace ASPNETv2.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
@@ -208,7 +212,8 @@ namespace ASPNETv2.Migrations
                 {
                     b.HasOne("ASPNETv2.Models.User", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("ASPNETv2.Models.Profile", "UserId");
+                        .HasForeignKey("ASPNETv2.Models.Profile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });

@@ -10,7 +10,9 @@
 
         public Guid? UserId { get; set; }
         public User? User { get; set; }
+        //public List <string>? GroupIds { get; set; }
         public ICollection<Group>? Groups { get; set; }
+        //public List <string>? NoteIds { get; set; }
         public ICollection<Note>? Notes { get; set; }
         public ICollection<ProfileGroupRelation>? ProfileGroupRelations { get; set; }
     }

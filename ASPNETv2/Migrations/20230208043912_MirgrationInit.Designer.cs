@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNETv2.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230204143643_Migrare")]
-    partial class Migrare
+    [Migration("20230208043912_MirgrationInit")]
+    partial class MirgrationInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,10 @@ namespace ASPNETv2.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -211,7 +215,8 @@ namespace ASPNETv2.Migrations
                 {
                     b.HasOne("ASPNETv2.Models.User", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("ASPNETv2.Models.Profile", "UserId");
+                        .HasForeignKey("ASPNETv2.Models.Profile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });

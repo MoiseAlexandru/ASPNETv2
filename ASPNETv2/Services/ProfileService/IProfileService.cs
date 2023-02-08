@@ -7,8 +7,10 @@ namespace ASPNETv2.Services.ProfileService
     {
         List <GroupJoinInDTO> GetGroupListByUsername(string username);
         Task <Profile> CreateOnUserRegistration(User user);
-        Task<List<Profile>> GetProfileList();
+        Task<List<ProfileDTO>> GetProfileList();
         Task LinkToUser(Profile profile, User user);
         Task UpdateProfile(ModifyProfileDTO newProfile);
+        Task <Profile> GetProfileByUsername(string username);
+        Task LinkNote(Profile profile, Note note);
     }
 }

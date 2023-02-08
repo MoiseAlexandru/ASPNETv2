@@ -20,5 +20,13 @@ namespace ASPNETv2.Repository.NoteRepostitory
         {
             return _table.Include(note => note.Profile).FirstOrDefault(note => note.NoteId == noteId);
         }
+        public async Task <Note> FindNoteByIdAsync(Guid id)
+        {
+            return await _table.FirstOrDefaultAsync(note => note.NoteId == id);
+        }
+        public async Task <List <Note>> GetAllNotes()
+        {
+            return await _table.ToListAsync();
+        }
     }
 }

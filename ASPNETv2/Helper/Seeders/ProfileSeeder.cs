@@ -12,6 +12,7 @@ namespace ASPNETv2.Helper.Seeders
         }
         public void SeedInitialProfiles()
         {
+            /*
             if(!_databaseContext.Profiles.Any())
             {
                 var profile1 = new Profile
@@ -30,6 +31,7 @@ namespace ASPNETv2.Helper.Seeders
                 _databaseContext.Add(profile2);
                 _databaseContext.SaveChanges();
             }
+            */
         }
     }
 }

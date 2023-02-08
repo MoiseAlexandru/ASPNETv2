@@ -46,7 +46,7 @@ namespace ASPNETv2.Services.UserService
         public UserResponseDTO Authenticate(UserRequestDTO model)
         {
             var user = _userRepository.FindByUsername(model.UserName);
-            if (user == null || !BCryptNet.Verify(model.Password, user.PasswordHash))
+            if (user == null || user.Role != model.Role || !BCryptNet.Verify(model.Password, user.PasswordHash))
             {
                 return null;
             }
