@@ -1,4 +1,5 @@
 ﻿using ASPNETv2.Models;
+using ASPNETv2.Models.DTOs;
 using ASPNETv2.Repository.GenericRepository;
 
 namespace ASPNETv2.Repository.ProfileRepository
@@ -12,5 +13,6 @@ namespace ASPNETv2.Repository.ProfileRepository
         Profile GetGroupsByUser(string username);
         Task <Profile> GetGroupsByUserAsync(string username);
         Task<List<Profile>> GetProfileList();
+        Task<Profile> GetProfileByUsername(string username);
     }
 }

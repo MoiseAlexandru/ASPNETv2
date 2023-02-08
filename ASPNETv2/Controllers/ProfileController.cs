@@ -1,4 +1,5 @@
 ﻿
+using ASPNETv2.Models.DTOs;
 using ASPNETv2.Services.ProfileService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,12 @@ namespace ASPNETv2.Controllers
         {
             var result = await _profileService.GetProfileList();
             return Ok(result);
+        }
+        [HttpPatch("update-profile")]
+        public async Task <IActionResult> UpdateProfile(ModifyProfileDTO profile)
+        {
+            await _profileService.UpdateProfile(profile);
+            return Ok();
         }
     }
 }

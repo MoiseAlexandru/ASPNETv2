@@ -47,5 +47,25 @@ namespace ASPNETv2.Services.ProfileService
             _profileRepository.Update(profile);
             await _profileRepository.SaveAsync();
         }
+
+        public async Task UpdateProfile(ModifyProfileDTO newProfile)
+        {
+            Profile profileToUpdate = await _profileRepository.GetProfileByUsername(newProfile.Username);
+            if (newProfile.FirstName != null)
+            {
+                profileToUpdate.FirstName = newProfile.FirstName;
+            }
+            if (newProfile.LastName != null)
+            {
+                profileToUpdate.LastName = newProfile.LastName;
+            }
+            if (newProfile.Address != null)
+            {
+                profileToUpdate.Address = newProfile.Address;
+            }
+            _profileRepository.Update(profileToUpdate);
+            await _profileRepository.SaveAsync();
+        }
+
     }
 }

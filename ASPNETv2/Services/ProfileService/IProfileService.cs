@@ -9,5 +9,6 @@ namespace ASPNETv2.Services.ProfileService
         Task <Profile> CreateOnUserRegistration(User user);
         Task<List<Profile>> GetProfileList();
         Task LinkToUser(Profile profile, User user);
+        Task UpdateProfile(ModifyProfileDTO newProfile);
     }
 }

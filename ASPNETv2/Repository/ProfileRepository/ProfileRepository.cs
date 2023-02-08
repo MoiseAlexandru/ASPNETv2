@@ -1,5 +1,6 @@
 ﻿using ASPNETv2.Data;
 using ASPNETv2.Models;
+using ASPNETv2.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASPNETv2.Repository.ProfileRepository
@@ -48,6 +49,14 @@ namespace ASPNETv2.Repository.ProfileRepository
             var result = await (from profile in _table
                                   select profile).ToListAsync();
             return result;
+        }
+
+        public async Task <Profile> GetProfileByUsername(string username)
+        {
+            var result = await (from profile in _table
+                                where profile.Username == username
+                                select profile).FirstAsync();
+            return result;      
         }
     }
 }
