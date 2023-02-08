@@ -29,31 +29,46 @@ namespace ASPNETv2.Repository.GenericRepository
         // Create
         public void Create(TEntity entity)
         {
+            entity.DateCreated = DateTime.Now;
             _table.Add(entity);
         }
         public async Task CreateAsync(TEntity entity)
         {
+            entity.DateCreated = DateTime.Now;
             await _table.AddAsync(entity);
         }
         public void CreateRange(IEnumerable <TEntity> entities)
         {
-            _table.AddRange(entities);
+            foreach (var entity in entities)
+            {
+                entity.DateCreated = DateTime.Now;
+                _table.Add(entity);
+            }
         }
 
         public async Task CreateRangeAsync(IEnumerable <TEntity> entities)
         {
-            await _table.AddRangeAsync(entities);
+            foreach (var entity in entities)
+            {
+                entity.DateCreated = DateTime.Now;
+                await _table.AddAsync(entity);
+            }
         }
 
         // Update
 
         public void Update(TEntity entity)
         {
+            entity.DateModified = DateTime.Now;
             _table.Update(entity);
         }
         public void UpdateRange(IEnumerable <TEntity> entities)
         {
-            _table.UpdateRange(entities);
+            foreach(var entity in entities)
+            {
+                entity.DateModified = DateTime.Now;
+                _table.Update(entity);
+            }
         }
 
         // Delete

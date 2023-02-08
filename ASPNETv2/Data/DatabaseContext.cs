@@ -44,7 +44,8 @@ namespace ASPNETv2.Data
             modelBuilder.Entity<User>()
                 .HasOne(user => user.Profile)
                 .WithOne(profile => profile.User)
-                .HasForeignKey<Profile>(profile => profile.UserId);
+                .HasForeignKey<Profile>(profile => profile.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

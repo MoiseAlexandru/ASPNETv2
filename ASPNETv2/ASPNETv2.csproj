@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\DTOs\NewFolder\**" />
+    <Content Remove="Models\DTOs\NewFolder\**" />
+    <EmbeddedResource Remove="Models\DTOs\NewFolder\**" />
+    <None Remove="Models\DTOs\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />

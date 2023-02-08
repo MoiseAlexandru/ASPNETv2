@@ -10,9 +10,10 @@ namespace ASPNETv2.Services.UserService
         UserResponseDTO Authenticate(UserRequestDTO model);
         User GetById(Guid id);
         Task Create(User newUser);
-        Task <List<User>> GetUserListAsync();
+        Task <List<UserDTO>> GetUserListAsync();
         Task DeleteUser(User userToDelete);
         Task <User> GetUserByUsername(string username);
+        Task <UserDTO> GetUserByUsernameDTO(string username);
         Task LinkToProfile(User user, Profile profile);
     }
 }

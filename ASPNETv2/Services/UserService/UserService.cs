@@ -2,6 +2,7 @@
 using ASPNETv2.Models;
 using ASPNETv2.Models.DTOs;
 using ASPNETv2.Repository.UserRepository;
+using System.Text.Json.Serialization;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace ASPNETv2.Services.UserService
@@ -66,22 +67,47 @@ namespace ASPNETv2.Services.UserService
             return _userRepository.FindById(id);
         }
 
-        public async Task <List <User>> GetUserListAsync()
-        {
-            return await _userRepository.GetUserListAsync();
-        }
+        
         public async Task DeleteUser(User userToDelete)
         {
             await Task.Run(() => _userRepository.Delete(userToDelete));
             await _userRepository.SaveAsync();
         }
-        public async Task <User> GetUserByUsername(string username)
+        public UserDTO convertUserToDTO(User user)
+        {
+            UserDTO returnedUser = new UserDTO();
+            returnedUser.UserId = user.UserId;
+            returnedUser.UserName = user.UserName;
+            returnedUser.Email = user.Email;
+            returnedUser.ProfileId = user.ProfileId;
+            returnedUser.Role = user.Role;
+            return returnedUser;
+        }
+        public async Task<List<UserDTO>> GetUserListAsync()
+        {
+            List<User> userList = await _userRepository.GetUserListAsync();
+            List<UserDTO> convertedList = new List<UserDTO>();
+            foreach (var user in userList)
+            {
+                convertedList.Add(convertUserToDTO(user));
+            }
+            return convertedList;
+        }
+
+        public async Task<User> GetUserByUsername(string username)
         {
             return await _userRepository.GetUserByUsername(username);
         }
+        public async Task<UserDTO> GetUserByUsernameDTO(string username)
+        {
+            User user = await _userRepository.GetUserByUsername(username);
+            UserDTO returnedUser = new UserDTO();
+            returnedUser = convertUserToDTO(user);
+            return returnedUser;
+        }
         public async Task LinkToProfile(User user, Profile profile)
         {
-            user.ProfileId = profile.Id;
+            user.ProfileId = user.UserId;
             _userRepository.Update(user);
             await _userRepository.SaveAsync();
         }

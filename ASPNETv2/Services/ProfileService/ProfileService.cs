@@ -8,14 +8,14 @@ namespace ASPNETv2.Services.ProfileService
     {
         public IProfileRepository _profileRepository;
         public ProfileService(IProfileRepository profileRepository)
-        { 
+        {
             _profileRepository = profileRepository;
         }
-        public List <GroupJoinInDTO> GetGroupListByUsername(string username)
+        public List<GroupJoinInDTO> GetGroupListByUsername(string username)
         {
             Profile profile = _profileRepository.GetGroupsByUser(username);
-            List<GroupJoinInDTO> result = new List<GroupJoinInDTO> ();
-            foreach(var group in profile.Groups)
+            List<GroupJoinInDTO> result = new List<GroupJoinInDTO>();
+            foreach (var group in profile.Groups)
             {
                 GroupJoinInDTO currentEntrance = new GroupJoinInDTO();
                 currentEntrance.Username = profile.Username;
@@ -26,13 +26,13 @@ namespace ASPNETv2.Services.ProfileService
             }
             return result;
         }
-        public async Task <Profile> CreateOnUserRegistration(User user)
+        public async Task<Profile> CreateOnUserRegistration(User user)
         {
             Profile newProfile = new Profile();
-            newProfile.Id = Guid.NewGuid();
+            newProfile.ProfileId = user.UserId;
+            newProfile.UserId = user.UserId;
             newProfile.Username = user.UserName;
             newProfile.User = user;
-            newProfile.UserId = user.UserId;
             await Task.Run(() => _profileRepository.Create(newProfile));
             await _profileRepository.SaveAsync();
             return newProfile;
@@ -43,7 +43,7 @@ namespace ASPNETv2.Services.ProfileService
         }
         public async Task LinkToUser(Profile profile, User user)
         {
-            profile.UserId = user.Id;
+            profile.ProfileId = user.UserId;
             _profileRepository.Update(profile);
             await _profileRepository.SaveAsync();
         }

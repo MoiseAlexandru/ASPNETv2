@@ -26,25 +26,29 @@ namespace ASPNETv2.Controllers
             return Ok(result);
         }
         [HttpPost("create-custom-user")]
-        public async Task <IActionResult> CreateCustomUser(UserRequestDTO user)
+        public async Task<IActionResult> CreateCustomUser(UserRequestDTO user)
         {
             var userToCreate = new User
             {
+                UserId = Guid.NewGuid(),
                 UserName = user.UserName,
                 Email = user.Email,
                 Role = user.Role,
                 PasswordHash = BCryptNet.HashPassword(user.Password)
             };
             await _userService.Create(userToCreate);
-            await _profileService.CreateOnUserRegistration(userToCreate);
+            Profile newProfile = await _profileService.CreateOnUserRegistration(userToCreate);
+            await _userService.LinkToProfile(userToCreate, newProfile);
+            await _profileService.LinkToUser(newProfile, userToCreate);
             return Ok();
         }
 
         [HttpPost("create-default-user")]
-        public async Task <IActionResult> CreateDefaultUser(UserRequestDTO user)
+        public async Task<IActionResult> CreateDefaultUser(UserRequestDTO user)
         {
             var userToCreate = new User
             {
+                UserId = Guid.NewGuid(),
                 UserName = user.UserName,
                 Email = user.Email,
                 Role = Role.User,
@@ -54,7 +58,7 @@ namespace ASPNETv2.Controllers
             Profile newProfile = await _profileService.CreateOnUserRegistration(userToCreate);
             await _userService.LinkToProfile(userToCreate, newProfile);
             await _profileService.LinkToUser(newProfile, userToCreate);
-            return Ok(newProfile);
+            return Ok();
         }
 
         [HttpPost("create-admin")]
@@ -62,23 +66,26 @@ namespace ASPNETv2.Controllers
         {
             var userToCreate = new User
             {
+                UserId = Guid.NewGuid(),
                 UserName = user.UserName,
                 Email = user.Email,
                 Role = Role.Admin,
                 PasswordHash = BCryptNet.HashPassword(user.Password)
             };
             await _userService.Create(userToCreate);
-            await _profileService.CreateOnUserRegistration(userToCreate);
+            Profile newProfile = await _profileService.CreateOnUserRegistration(userToCreate);
+            await _userService.LinkToProfile(userToCreate, newProfile);
+            await _profileService.LinkToUser(newProfile, userToCreate);
             return Ok();
         }
         [HttpGet("get-user-list")]
-        public async Task <IActionResult> GetUserList()
+        public async Task<IActionResult> GetUserList()
         {
             var users = await _userService.GetUserListAsync();
             return Ok(users);
         }
         [HttpDelete("delete-user")]
-        public async Task <IActionResult> DeleteUser(string username)
+        public async Task<IActionResult> DeleteUser(string username)
         {
             User user = await _userService.GetUserByUsername(username);
             await _userService.DeleteUser(user);
