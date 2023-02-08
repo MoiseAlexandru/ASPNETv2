@@ -56,5 +56,12 @@ namespace ASPNETv2.Controllers
             await _profileService.LinkNote(owner, note);
             return Ok();
         }
+        [HttpPatch("modify-note")]
+        public async Task <IActionResult> ModifyNote(NoteDTO noteDTO)
+        {
+            Note toModify = await _noteService.FindNoteByIdAsync(noteDTO.NoteId);
+            await _noteService.ModifyNote(toModify, noteDTO);
+            return Ok();
+        }
     }
 }

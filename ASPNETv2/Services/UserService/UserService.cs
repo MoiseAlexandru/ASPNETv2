@@ -57,8 +57,12 @@ namespace ASPNETv2.Services.UserService
 
         public async Task Create(User newUser)
         {
-            await _userRepository.CreateAsync(newUser);
-            await _userRepository.SaveAsync();
+            var alreadyUser = _userRepository.GetUserByUsername(newUser.UserName);
+            if (alreadyUser == null)
+            {
+                await _userRepository.CreateAsync(newUser);
+                await _userRepository.SaveAsync();
+            }
         }
 
 

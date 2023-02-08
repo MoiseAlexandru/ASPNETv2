@@ -49,5 +49,12 @@ namespace ASPNETv2.Services.NoteService
             }
             return converted;
         }
+        public async Task ModifyNote(Note note, NoteDTO noteDTO)
+        {
+            note.Title = noteDTO.Title;
+            note.Description = noteDTO.Description;
+            _noteRepository.Update(note);
+            await _noteRepository.SaveAsync();
+        }
     }
 }

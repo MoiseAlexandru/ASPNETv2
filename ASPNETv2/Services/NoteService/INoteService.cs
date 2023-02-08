@@ -10,5 +10,6 @@ namespace ASPNETv2.Services.NoteService
         Task DeleteNote(Note note);
         Task CreateNote(Note note);
         Task <List <NoteDTO>> GetAllNotes();
+        Task ModifyNote(Note note, NoteDTO noteDTO);
     }
 }
